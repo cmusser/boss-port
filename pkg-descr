@@ -1,0 +1,5 @@
+boss allows clients to request that a process be run via
+a web request. The process is only started if it is not
+already running.
+
+WWW: https://github.com/cmusser/boss

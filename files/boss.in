@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+
+# PROVIDE: boss
+# REQUIRE: DAEMON
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name=boss
+rcvar=boss_enable
+
+load_rc_config $name
+
+: ${boss_enable="NO"}
+: ${boss_pidfile="/var/run/${name}.pid"}
+
+command="/usr/local/bin/${name}"
+pidfile="${boss_pidfile}"
+
+run_rc_command $*
