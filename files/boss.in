@@ -14,8 +14,12 @@ load_rc_config $name
 
 : ${boss_enable="NO"}
 : ${boss_pidfile="/var/run/${name}.pid"}
+: ${boss_log="/var/log/boss.log "}
 
-command="/usr/local/bin/${name}"
+boss_command="/usr/local/bin/${name}"
+boss_command_args="-c /etc/boss.yaml"
+command="/usr/sbin/daemon"
+command_args="-P ${boss_pidfile} -f -r -o ${boss_log} ${boss_command} ${boss_command_args}"
 pidfile="${boss_pidfile}"
 
 run_rc_command $*

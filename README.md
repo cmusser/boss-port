@@ -2,11 +2,37 @@
 
 This is the BSD Ports system configuration project for boss.
 
+## Building a port that depends on a crate not on crates.io
+
+Currently, this project requires a patched version of the Nix
+library that isn't available on crates.io. As a result, the
+setup is a little more involved than usual.
+
+1. The source of the modified dependency (Nix) is in a Github repository.
+   I had done this anyway because I created a pull request with the
+   intent on getting the change into the standard Nix crate.
+
+2. In `Cargo.toml`, the dependency in `boss` on Nix uses the `git` and
+   `branch` attributes to specify the one in Git. These are also recorded
+   in `Cargo.lock`. This is in a separate branch and is tagged so that the
+   Makefile here in `boss-port` can reference it using the GH_TAGNAME
+   variable.
+
+I tried coming at this in a different way--creating patches for
+`Cargo.{lock,toml}` in `boss-port` (and not `boss` itself)--thinking it
+would be easier to not have a special version of `boss` in Git. But this
+resulted in Cargo errors regarding the checksums of the downloaded Nix
+crate. I think the patches are applied too late in the process: they'd
+need to happen before the `make makesum` step, which is when ther
+dependencies are downloaded.
+
 ## Procedure
 
 1. Make sure that the ports system is setup. On FreeBSD, this is done with
 
-    `sudo portsnap fetch extract`
+   ```
+   sudo portsnap fetch extract
+   ```
 
    On DragonFly the procedure is:
 
@@ -68,5 +94,5 @@ This is the BSD Ports system configuration project for boss.
    ```
 8. Install the built package:
    ```
-   sudo pkg install /usr/obj/dports/src/boss-port/pkg/boss-0.1.0.txz
+   sudo pkg install /usr/obj/dports/src/boss-port/pkg/boss-2.0.0.txz
    ```
