@@ -91,4 +91,5 @@ CARGO_CRATES=	aho-corasick-0.7.13 \
 		winapi-x86_64-pc-windows-gnu-0.4.0 \
 		ws2_32-sys-0.2.1 \
 		yaml-rust-0.4.4
+
 .include <bsd.port.mk>
