@@ -51,7 +51,7 @@ This is the BSD Ports system configuration project for boss.
    ```
 
    Paste the result of this into the Makefile.
-   
+
 6. Regenerate the `distinfo` file:
    ```
 	sudo make makesum`
@@ -70,5 +70,5 @@ This is the BSD Ports system configuration project for boss.
    ```
 8. Install the built package:
    ```
-   sudo pkg install /usr/obj/dports/src/boss-port/pkg/boss-2.0.0.txz
+   sudo pkg install /usr/obj/dports/src/boss-port/pkg/boss-2.1.1.txz
    ```
